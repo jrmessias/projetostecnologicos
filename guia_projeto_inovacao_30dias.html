@@ -1,0 +1,537 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.ap{max-width:680px;padding:0 0 2rem;color:var(--color-text-primary);font-family:var(--font-sans)}
+.capa{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:1.5rem;margin-bottom:1.5rem;border-left:4px solid #185FA5}
+.capa-tag{font-size:11px;font-weight:500;color:#185FA5;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.4rem}
+.capa h1{font-size:20px;font-weight:500;line-height:1.3;margin-bottom:.35rem}
+.capa p{font-size:13px;color:var(--color-text-secondary)}
+.nav{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1.5rem}
+.nb{background:transparent;border:.5px solid var(--color-border-secondary);border-radius:20px;padding:5px 13px;font-size:12px;cursor:pointer;color:var(--color-text-secondary);font-family:var(--font-sans);transition:all .15s}
+.nb:hover{background:var(--color-background-secondary)}
+.nb.active{background:#E6F1FB;border-color:#185FA5;color:#0C447C;font-weight:500}
+.sec{display:none}.sec.active{display:block}
+.sec-h{font-size:17px;font-weight:500;margin-bottom:.2rem}
+.sec-s{font-size:13px;color:var(--color-text-secondary);margin-bottom:1.25rem;border-bottom:.5px solid var(--color-border-tertiary);padding-bottom:.6rem}
+.card{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.2rem;margin-bottom:.9rem}
+.ch{display:flex;align-items:center;gap:9px;margin-bottom:.7rem}
+.ci{width:30px;height:30px;border-radius:var(--border-radius-md);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px}
+.ci.blue{background:#E6F1FB;color:#185FA5}
+.ci.teal{background:#E1F5EE;color:#0F6E56}
+.ci.amber{background:#FAEEDA;color:#854F0B}
+.ci.coral{background:#FAECE7;color:#993C1D}
+.ci.purple{background:#EEEDFE;color:#534AB7}
+.ci.green{background:#EAF3DE;color:#3B6D11}
+.ct{font-size:14px;font-weight:500}
+.cbg{font-size:11px;padding:2px 8px;border-radius:20px;margin-left:auto}
+.bblue{background:#E6F1FB;color:#0C447C}
+.bteal{background:#E1F5EE;color:#085041}
+.bamber{background:#FAEEDA;color:#633806}
+.bcoral{background:#FAECE7;color:#712B13}
+.bpurple{background:#EEEDFE;color:#3C3489}
+.bgreen{background:#EAF3DE;color:#27500A}
+.card p,.card li{font-size:13.5px;line-height:1.65;color:var(--color-text-secondary)}
+.card ul,.card ol{padding-left:1.2rem}
+.card li{margin-bottom:4px}
+.card strong{color:var(--color-text-primary);font-weight:500}
+.hbox{border-left:3px solid #185FA5;background:#E6F1FB;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;padding:.65rem .9rem;margin:.65rem 0}
+.hbox p{font-size:13px;color:#0C447C}
+.hbox strong{color:#042C53}
+.wbox{border-left:3px solid #BA7517;background:#FAEEDA;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;padding:.65rem .9rem;margin:.65rem 0}
+.wbox p{font-size:13px;color:#854F0B}
+.tbox{border-left:3px solid #0F6E56;background:#E1F5EE;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;padding:.65rem .9rem;margin:.65rem 0}
+.tbox p{font-size:13px;color:#085041}
+.ex{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.7rem .9rem;margin:.65rem 0}
+.exl{font-size:11px;font-weight:500;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.3rem}
+.ex p{font-size:13px;color:var(--color-text-primary);line-height:1.65;font-style:italic}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:.7rem 0}
+.mc{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.7rem .85rem}
+.mc h5{font-size:12px;font-weight:500;margin-bottom:3px}
+.mc p{font-size:12px;color:var(--color-text-secondary);line-height:1.5}
+.step-list{margin:.5rem 0}
+.si{display:flex;gap:10px;margin-bottom:.85rem}
+.sn{width:24px;height:24px;border-radius:50%;background:#E6F1FB;color:#0C447C;font-size:11px;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.sc h4{font-size:13.5px;font-weight:500;margin-bottom:2px}
+.sc p{font-size:13px;color:var(--color-text-secondary);line-height:1.6}
+.tl{position:relative}
+.ti{display:flex;gap:14px;margin-bottom:1.1rem}
+.td{width:11px;height:11px;border-radius:50%;background:#185FA5;margin-top:4px;flex-shrink:0;position:relative}
+.td::after{content:'';position:absolute;left:5px;top:11px;width:1px;height:calc(100% + 14px);background:var(--color-border-tertiary)}
+.ti:last-child .td::after{display:none}
+.tc h4{font-size:13.5px;font-weight:500}
+.tc p{font-size:13px;color:var(--color-text-secondary);margin-top:1px;line-height:1.55}
+.tt{font-size:11px;background:var(--color-background-secondary);border:.5px solid var(--color-border-tertiary);border-radius:20px;padding:1px 8px;color:var(--color-text-secondary);display:inline-block;margin-top:3px}
+.cl{list-style:none;padding:0}
+.cl li{display:flex;gap:7px;align-items:flex-start;font-size:13.5px;color:var(--color-text-secondary);padding:5px 0;border-bottom:.5px solid var(--color-border-tertiary)}
+.cl li:last-child{border-bottom:none}
+.cl li i{color:#1D9E75;margin-top:2px;flex-shrink:0}
+.ab{display:inline-flex;align-items:center;gap:5px;background:transparent;border:.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);padding:6px 12px;font-size:12px;cursor:pointer;color:var(--color-text-secondary);font-family:var(--font-sans);margin:.1rem;transition:all .15s}
+.ab:hover{background:var(--color-background-secondary);color:var(--color-text-primary)}
+.vlink{display:inline-flex;align-items:center;gap:6px;background:#FAECE7;border:.5px solid #F0997B;border-radius:var(--border-radius-md);padding:5px 11px;font-size:12px;color:#712B13;text-decoration:none;margin:.2rem}
+.vlink:hover{background:#F5C4B3}
+.tool-card{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:.85rem 1rem;margin-bottom:.75rem}
+.tool-head{display:flex;align-items:center;gap:8px;margin-bottom:.5rem}
+.tool-num{width:22px;height:22px;border-radius:50%;background:#EEEDFE;color:#534AB7;font-size:11px;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.tool-title{font-size:14px;font-weight:500}
+.tool-tag{font-size:11px;background:#EEEDFE;color:#3C3489;border-radius:20px;padding:2px 8px;margin-left:auto}
+.tool-body p{font-size:13px;color:var(--color-text-secondary);line-height:1.6;margin-bottom:.4rem}
+.dias-badge{font-size:11px;font-weight:500;border-radius:20px;padding:3px 10px;display:inline-block;margin-bottom:.5rem}
+.d1{background:#E6F1FB;color:#0C447C}
+.d2{background:#E1F5EE;color:#085041}
+.d3{background:#FAEEDA;color:#633806}
+.d4{background:#EEEDFE;color:#3C3489}
+.d5{background:#EAF3DE;color:#27500A}
+.mvp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin:.6rem 0}
+.mvp-card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.7rem;text-align:center}
+.mvp-card .icon{font-size:20px;margin-bottom:.3rem;color:#534AB7}
+.mvp-card h5{font-size:12px;font-weight:500;margin-bottom:3px}
+.mvp-card p{font-size:11px;color:var(--color-text-secondary);line-height:1.45}
+.canvas-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:.6rem 0}
+.canvas-block{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.6rem .8rem}
+.canvas-block h5{font-size:11px;font-weight:500;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px}
+.canvas-block p{font-size:12px;color:var(--color-text-primary);line-height:1.5}
+.aluno-table{width:100%;border-collapse:collapse;font-size:12.5px}
+.aluno-table th{text-align:left;padding:6px 8px;border-bottom:1px solid var(--color-border-secondary);color:var(--color-text-secondary);font-weight:500;font-size:11px}
+.aluno-table td{padding:5px 8px;border-bottom:.5px solid var(--color-border-tertiary);color:var(--color-text-primary)}
+.aluno-table tr:last-child td{border-bottom:none}
+.polo-tag{font-size:10px;background:var(--color-background-secondary);border-radius:20px;padding:1px 7px;color:var(--color-text-secondary);white-space:nowrap}
+.grupo-tag{font-size:10px;border-radius:20px;padding:2px 7px;white-space:nowrap}
+.g-formado{background:#E1F5EE;color:#085041}
+.g-individual{background:#FAEEDA;color:#633806}
+.g-distribuir{background:#FAECE7;color:#712B13}
+.g-parcial{background:#EEEDFE;color:#3C3489}
+</style>
+
+<h2 class="sr-only">Guia completo de projeto de inovação para disciplina de 30 dias</h2>
+
+<div class="ap">
+<div class="capa">
+  <div class="capa-tag">Elaboração e Gerenciamento de Projetos Tecnológicos — Guia Revisado</div>
+  <h1>Do Problema à Solução: Projeto de Inovação em 30 Dias</h1>
+  <p>Estrutura adaptada para projetos inovadores com Design Thinking e Lean Startup</p>
+</div>
+
+<nav class="nav">
+  <button class="nb active" onclick="show('visao')">Visão geral</button>
+  <button class="nb" onclick="show('sec1')">1 · Introdução</button>
+  <button class="nb" onclick="show('sec2')">2 · Evidências</button>
+  <button class="nb" onclick="show('sec3')">3 · Solução e MVP</button>
+  <button class="nb" onclick="show('sec4')">4 · Resultados</button>
+  <button class="nb" onclick="show('crono')">Cronograma</button>
+  <button class="nb" onclick="show('alunos')">Turma</button>
+</nav>
+
+<!-- VISÃO GERAL -->
+<div class="sec active" id="visao">
+  <div class="sec-h">Nova estrutura: projeto de inovação enxuto</div>
+  <div class="sec-s">Como as seções tradicionais se transformam em um projeto inovador real, em 30 dias</div>
+
+  <div class="card">
+    <div class="ch"><div class="ci amber"><i class="ti ti-alert-triangle" aria-hidden="true"></i></div><div class="ct">A realidade de 30 dias</div></div>
+    <p>Em 30 dias não dá para fazer pesquisa de campo extensa, desenvolver um sistema completo nem validar com clientes reais. O que dá para fazer — e muito bem — é <strong>estruturar uma proposta de solução sólida, baseada em evidências e com um MVP conceitual claro.</strong></p>
+    <div class="wbox"><p><strong>Mudança de mentalidade:</strong> o projeto não é sobre construir algo. É sobre propor e justificar uma solução tecnológica inovadora de forma convincente. Pense como um pitch para investidores, não como um relatório técnico.</p></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><div class="ci blue"><i class="ti ti-layout-list" aria-hidden="true"></i></div><div class="ct">Como as seções se transformam</div></div>
+    <div class="tl">
+      <div class="ti"><div class="td"></div><div class="tc"><h4>Introdução e Justificativa <span style="font-weight:400;color:var(--color-text-secondary)">+ Objetivo Geral</span></h4><p>Apresenta o problema de forma direta e define o objetivo. Ferramentas de diagnóstico do problema.</p><span class="tt">Semana 1</span></div></div>
+      <div class="ti"><div class="td"></div><div class="tc"><h4>Fundamentação Teórica / Estado da Arte → <strong>Fase de Evidências e Empatia</strong></h4><p>Demonstra com dados quem sofre o problema, como é afetado e o que já existe. Busca de evidências com 4 ferramentas.</p><span class="tt">Semana 2</span></div></div>
+      <div class="ti"><div class="td"></div><div class="tc"><h4>Metodologia / Desenvolvimento → <strong>Solução, MVP e Modelo de Negócio</strong></h4><p>Descreve como o problema será resolvido, com qual tecnologia, e qual é o MVP proposto.</p><span class="tt">Semana 3</span></div></div>
+      <div class="ti"><div class="td"></div><div class="tc"><h4>Resultados Esperados → <strong>Hipóteses de Validação</strong></h4><p>O que se espera alcançar e como a solução seria validada mesmo sem teste real.</p><span class="tt">Semana 4</span></div></div>
+      <div class="ti"><div class="td"></div><div class="tc"><h4>Considerações Finais + Referências</h4><p>Fechamento e fontes utilizadas.</p><span class="tt">Semana 4</span></div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><div class="ci teal"><i class="ti ti-file-description" aria-hidden="true"></i></div><div class="ct">Volume esperado por seção</div></div>
+    <div class="g2">
+      <div class="mc"><h5>Introdução + Objetivo</h5><p>~0,5–0,75 pág. Problema claro, contexto breve, objetivo direto.</p></div>
+      <div class="mc"><h5>Evidências e Empatia</h5><p>~0,75–1 pág. Dados do problema, público afetado, estado da arte.</p></div>
+      <div class="mc"><h5>Solução, MVP e Negócio</h5><p>~0,75–1 pág. Como resolve, o que é o MVP, modelo básico.</p></div>
+      <div class="mc"><h5>Resultados + Considerações</h5><p>~0,5–0,75 pág. Entregas esperadas + hipóteses de validação.</p></div>
+    </div>
+    <div class="tbox"><p><strong>Total: 3–4 páginas.</strong> Cada seção deve ser precisa e objetiva. Projeto inovador não é projeto longo — é projeto focado.</p></div>
+  </div>
+</div>
+
+<!-- SEÇÃO 1: INTRODUÇÃO -->
+<div class="sec" id="sec1">
+  <div class="sec-h">Seção 1 · Introdução, Justificativa e Objetivo</div>
+  <div class="sec-s">Como apresentar o problema de forma direta e convincente</div>
+
+  <div class="card">
+    <div class="ch"><div class="ci blue"><i class="ti ti-writing" aria-hidden="true"></i></div><div class="ct">Estrutura desta seção</div><span class="cbg bblue">~0,5–0,75 pág</span></div>
+    <p>Nesta seção, o grupo deve responder três perguntas em sequência, sem rodeios:</p>
+    <div class="step-list">
+      <div class="si"><div class="sn">1</div><div class="sc"><h4>Qual é o problema?</h4><p>Apresente o problema de forma específica. Evite começar com frases genéricas como "vivemos em um mundo cada vez mais tecnológico". Vá direto ao problema.</p></div></div>
+      <div class="si"><div class="sn">2</div><div class="sc"><h4>Por que ele existe e quem é afetado?</h4><p>Contextualiza brevemente a causa e os públicos que sentem o problema. Isso será aprofundado na seção de evidências.</p></div></div>
+      <div class="si"><div class="sn">3</div><div class="sc"><h4>O que o projeto propõe? (Objetivo Geral)</h4><p>Em 1–2 frases, descreva o que será proposto como solução. O objetivo geral pode ficar integrado à introdução ou em parágrafo próprio logo após.</p></div></div>
+    </div>
+    <div class="ex"><div class="exl">Exemplo de abertura direta</div><p>"Microempreendedores do setor de alimentação perdem em média 15% da receita mensal por falhas no controle de estoque — problema agravado pela ausência de ferramentas acessíveis e de baixo custo adaptadas à sua realidade. Este projeto propõe o desenvolvimento de um sistema de gestão de estoque simplificado, baseado em aplicativo mobile com inteligência artificial, voltado para esse público."</p></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><div class="ci purple"><i class="ti ti-tools" aria-hidden="true"></i></div><div class="ct">Ferramentas para definir o problema</div><span class="cbg bpurple">Material extra</span></div>
+    <p style="margin-bottom:.75rem">Antes de escrever a introdução, o grupo precisa ter clareza do problema. Use pelo menos uma dessas ferramentas durante a primeira semana:</p>
+
+    <div class="tool-card">
+      <div class="tool-head"><div class="tool-num">1</div><div class="tool-title">Matriz CSD (Certezas, Suposições e Dúvidas)</div><span class="tool-tag">Design Sprint</span></div>
+      <div class="tool-body">
+        <p>Divide o conhecimento do grupo em três colunas: o que temos certeza sobre o problema, o que supomos (mas precisamos confirmar) e o que não sabemos. Excelente para alinhar o time e identificar lacunas de conhecimento antes de começar a propor soluções.</p>
+        <p><strong>Como usar:</strong> cada membro do grupo escreve post-its (ou células numa planilha) e o grupo classifica juntos. As "dúvidas" viram perguntas de pesquisa para a fase de evidências.</p>
+        <a class="vlink" href="https://www.youtube.com/results?search_query=matriz+CSD+design+thinking+portugues" target="_blank"><i class="ti ti-brand-youtube" aria-hidden="true"></i> Buscar vídeos: Matriz CSD</a>
+      </div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-head"><div class="tool-num">2</div><div class="tool-title">Árvore de Problemas</div><span class="tool-tag">Planejamento</span></div>
+      <div class="tool-body">
+        <p>Mapeia o problema central no tronco, as causas nas raízes e os efeitos nos galhos. Ajuda a identificar se o grupo está atacando a causa raiz ou apenas um sintoma — erro muito comum em projetos de inovação.</p>
+        <p><strong>Como usar:</strong> coloque o problema central no centro de uma folha. Para baixo: "por que isso acontece?" (causas). Para cima: "o que isso gera?" (consequências). A solução deve atacar pelo menos uma causa raiz.</p>
+        <a class="vlink" href="https://www.youtube.com/results?search_query=arvore+de+problemas+logframe+projeto" target="_blank"><i class="ti ti-brand-youtube" aria-hidden="true"></i> Buscar vídeos: Árvore de Problemas</a>
+      </div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-head"><div class="tool-num">3</div><div class="tool-title">5 Porquês (5 Whys)</div><span class="tool-tag">Lean / Toyota</span></div>
+      <div class="tool-body">
+        <p>Pergunte "por quê?" cinco vezes seguidas sobre o problema. Cada resposta vira a base para a próxima pergunta. Simples e poderoso para chegar à causa raiz sem precisar de ferramentas complexas.</p>
+        <a class="vlink" href="https://www.youtube.com/results?search_query=5+porques+causa+raiz+lean" target="_blank"><i class="ti ti-brand-youtube" aria-hidden="true"></i> Buscar vídeos: 5 Porquês</a>
+      </div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-head"><div class="tool-num">4</div><div class="tool-title">Mapa de Empatia</div><span class="tool-tag">Design Thinking</span></div>
+      <div class="tool-body">
+        <p>Coloca o grupo no lugar do usuário afetado pelo problema. Preenche seis campos: o que ele <em>pensa e sente</em>, <em>ouve</em>, <em>vê</em>, <em>fala e faz</em>, quais são suas <em>dores</em> e seus <em>ganhos</em>. Ideal para gerar empatia genuína com quem sofre o problema.</p>
+        <a class="vlink" href="https://www.youtube.com/results?search_query=mapa+de+empatia+design+thinking+como+usar" target="_blank"><i class="ti ti-brand-youtube" aria-hidden="true"></i> Buscar vídeos: Mapa de Empatia</a>
+      </div>
+    </div>
+
+    <div class="hbox"><p><strong>Sobre a validação do problema via entrevistas:</strong> com 30 dias, o ideal seria realizar 3 a 5 entrevistas rápidas (15–20 min) com pessoas que vivem o problema. Se não for possível, use evidências secundárias (dados, notícias, pesquisas já publicadas) para justificar que o problema é real — isso vai para a seção de Evidências.</p></div>
+    <div style="margin-top:.5rem">
+      <a class="vlink" href="https://www.youtube.com/results?search_query=como+fazer+entrevista+descoberta+design+thinking" target="_blank"><i class="ti ti-brand-youtube" aria-hidden="true"></i> Entrevistas de descoberta</a>
+      <a class="vlink" href="https://www.youtube.com/results?search_query=validacao+de+problema+lean+startup+entrevista" target="_blank"><i class="ti ti-brand-youtube" aria-hidden="true"></i> Validação do problema</a>
+      <a class="vlink" href="https://www.youtube.com/results?search_query=como+entrevistar+usuarios+ux+research" target="_blank"><i class="ti ti-brand-youtube" aria-hidden="true"></i> Como entrevistar usuários</a>
+    </div>
+  </div>
+</div>
+
+<!-- SEÇÃO 2: EVIDÊNCIAS -->
+<div class="sec" id="sec2">
+  <div class="sec-h">Seção 2 · Fundamentação Teórica → Evidências e Empatia</div>
+  <div class="sec-s">Demonstre com dados que o problema é real, quem sofre e o que já existe</div>
+
+  <div class="card">
+    <div class="ch"><div class="ci teal"><i class="ti ti-database-search" aria-hidden="true"></i></div><div class="ct">O que esta seção precisa provar</div><span class="cbg bteal">~0,75–1 pág</span></div>
+    <p>Esta seção tem três funções simultâneas: <strong>(1)</strong> mostrar com evidências que o problema existe e tem escala; <strong>(2)</strong> identificar quem são as pessoas afetadas e como são impactadas; <strong>(3)</strong> apresentar o que já existe de solução e por que ainda há uma lacuna.</p>
+    <div class="g2">
+      <div class="mc"><h5>Evidência do problema</h5><p>Dados, estatísticas, pesquisas ou reportagens que comprovam que o problema é real e relevante.</p></div>
+      <div class="mc"><h5>Quem sente a dor</h5><p>Perfil do público afetado: quem são, quantos são, onde estão, como são impactados.</p></div>
+      <div class="mc"><h5>Estado da arte</h5><p>O que já existe de solução (nacional e internacional) e por que ainda não resolve totalmente.</p></div>
+      <div class="mc"><h5>Lacuna de inovação</h5><p>A oportunidade que o seu projeto vai ocupar — o "espaço em branco" entre o problema e as soluções atuais.</p></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><div class="ci purple"><i class="ti ti-search" aria-hidden="true"></i></div><div class="ct">4 ferramentas para buscar evidências</div></div>
+
+    <div class="tool-card">
+      <div class="tool-head"><div class="tool-num">1</div><div class="tool-title">Pesquisa Secundária (Desk Research)</div><span class="tool-tag">Sempre viável</span></div>
+      <div class="tool-body">
+        <p>Levantamento de dados já existentes: relatórios de institutos (IBGE, SEBRAE, FGV, IPEA), artigos acadêmicos (Google Scholar, Scielo), notícias de veículos confiáveis, white papers de empresas e pesquisas setoriais.</p>
+        <p><strong>Onde buscar:</strong> Google Scholar, Scielo, SEBRAE Insights, Statista, relatórios da McKinsey/Deloitte/Gartner (muitos com versões gratuitas), sites do governo federal.</p>
+        <a class="vlink" href="https://scholar.google.com" target="_blank"><i class="ti ti-external-link" aria-hidden="true"></i> Google Scholar</a>
+        <a class="vlink" href="https://www.scielo.br" target="_blank"><i class="ti ti-external-link" aria-hidden="true"></i> Scielo Brasil</a>
+      </div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-head"><div class="tool-num">2</div><div class="tool-title">Análise de Benchmarking</div><span class="tool-tag">Estado da arte</span></div>
+      <div class="tool-body">
+        <p>Mapeie 3 a 5 soluções existentes (startups, apps, sistemas, processos) que atacam o mesmo problema. Para cada uma, identifique: o que resolvem bem, o que não resolvem, para quem são feitas e qual o custo/barreira de acesso. A lacuna entre elas é a justificativa da inovação do projeto.</p>
+        <a class="vlink" href="https://www.youtube.com/results?search_query=analise+benchmarking+inovacao+como+fazer" target="_blank"><i class="ti ti-brand-youtube" aria-hidden="true"></i> Como fazer benchmarking</a>
+      </div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-head"><div class="tool-num">3</div><div class="tool-title">Entrevistas Exploratórias (3 a 5 pessoas)</div><span class="tool-tag">Recomendado se possível</span></div>
+      <div class="tool-body">
+        <p>Mesmo que curtas (15–20 min), entrevistas com pessoas que vivem o problema fornecem evidências qualitativas poderosas. Não são pesquisas de opinião — são conversas abertas para entender a experiência do problema.</p>
+        <p><strong>Dicas rápidas:</strong> (1) comece com "Conte-me sobre a última vez que você enfrentou esse problema"; (2) não apresente a solução — ouça; (3) pergunte "por quê?" com frequência; (4) anote citações literais — elas têm peso no documento.</p>
+        <a class="vlink" href="https://www.youtube.com/results?search_query=entrevista+profundidade+design+thinking+roteiro" target="_blank"><i class="ti ti-brand-youtube" aria-hidden="true"></i> Roteiro de entrevista</a>
+      </div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-head"><div class="tool-num">4</div><div class="tool-title">Survey Rápido (Google Forms)</div><span class="tool-tag">Fácil de aplicar</span></div>
+      <div class="tool-body">
+        <p>Um formulário curto (5–8 perguntas) compartilhado via WhatsApp/LinkedIn pode gerar dados quantitativos rápidos. Foque em confirmar a existência e frequência do problema, não em testar a solução ainda.</p>
+        <p><strong>Modelo básico de perguntas:</strong> (1) Você enfrenta [problema X]? (2) Com que frequência? (3) Como impacta seu trabalho/vida? (4) O que você usa hoje para resolver (ou tenta)? (5) Por que essa solução atual é insuficiente?</p>
+        <a class="vlink" href="https://forms.google.com" target="_blank"><i class="ti ti-external-link" aria-hidden="true"></i> Google Forms</a>
+        <a class="vlink" href="https://www.youtube.com/results?search_query=pesquisa+quantitativa+formulario+validacao+startup" target="_blank"><i class="ti ti-brand-youtube" aria-hidden="true"></i> Survey para validação</a>
+      </div>
+    </div>
+
+    <div class="tbox"><p><strong>Dica de escrita:</strong> ao redigir esta seção, comece pelo dado mais impactante. Ex: "Segundo o SEBRAE (2023), 60% das micro e pequenas empresas fecham nos primeiros 5 anos por problemas de gestão financeira." Isso ancora o leitor no problema antes de qualquer explicação teórica.</p></div>
+  </div>
+</div>
+
+<!-- SEÇÃO 3: SOLUÇÃO E MVP -->
+<div class="sec" id="sec3">
+  <div class="sec-h">Seção 3 · Metodologia/Desenvolvimento → Solução, MVP e Modelo de Negócio</div>
+  <div class="sec-s">Descreva como o problema será resolvido, com qual tecnologia e em que formato de produto</div>
+
+  <div class="card">
+    <div class="ch"><div class="ci amber"><i class="ti ti-bulb" aria-hidden="true"></i></div><div class="ct">O que esta seção deve conter</div><span class="cbg bamber">~0,75–1 pág</span></div>
+    <div class="step-list">
+      <div class="si"><div class="sn">1</div><div class="sc"><h4>Descrição da solução proposta</h4><p>Em 1–2 parágrafos: o que o produto/serviço/sistema faz, para quem, e como resolve o problema identificado. Seja específico sobre tecnologias e abordagem.</p></div></div>
+      <div class="si"><div class="sn">2</div><div class="sc"><h4>Definição do MVP</h4><p>Qual é a versão mínima viável da solução? O que ela precisa ter para testar a hipótese principal? O MVP não é o produto final — é o suficiente para aprender.</p></div></div>
+      <div class="si"><div class="sn">3</div><div class="sc"><h4>Modelo de negócio simplificado</h4><p>Como a solução chega ao usuário? Quem paga? Como se sustenta? Não precisa de plano financeiro — uma descrição qualitativa é suficiente.</p></div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><div class="ci coral"><i class="ti ti-rocket" aria-hidden="true"></i></div><div class="ct">Tipos de MVP para escolher</div></div>
+    <p style="margin-bottom:.7rem;font-size:13.5px;color:var(--color-text-secondary)">O grupo escolhe o tipo de MVP mais adequado ao contexto do projeto:</p>
+    <div class="mvp-grid">
+      <div class="mvp-card"><div class="icon"><i class="ti ti-file-description" aria-hidden="true"></i></div><h5>MVP Conceitual</h5><p>Documento ou apresentação descrevendo a solução com detalhes suficientes para avaliação</p></div>
+      <div class="mvp-card"><div class="icon"><i class="ti ti-layout" aria-hidden="true"></i></div><h5>Protótipo de Tela</h5><p>Wireframes ou mockups no Figma/Canva mostrando como seria a interface da solução</p></div>
+      <div class="mvp-card"><div class="icon"><i class="ti ti-presentation" aria-hidden="true"></i></div><h5>Pitch / Vídeo</h5><p>Apresentação ou vídeo de 2–3 minutos demonstrando o problema e a solução proposta</p></div>
+      <div class="mvp-card"><div class="icon"><i class="ti ti-settings-2" aria-hidden="true"></i></div><h5>Protótipo Funcional</h5><p>Versão mínima funcional com as funcionalidades principais (para grupos com dev no time)</p></div>
+    </div>
+    <div class="tbox"><p><strong>Para a maioria dos grupos desta turma:</strong> o MVP Conceitual + Protótipo de Tela é o mais adequado para 30 dias. Figma (gratuito) ou mesmo slides bem estruturados já demonstram a solução com credibilidade.</p></div>
+    <a class="vlink" href="https://www.youtube.com/results?search_query=o+que+e+MVP+produto+minimo+viavel+exemplos" target="_blank"><i class="ti ti-brand-youtube" aria-hidden="true"></i> O que é MVP</a>
+    <a class="vlink" href="https://www.figma.com" target="_blank"><i class="ti ti-external-link" aria-hidden="true"></i> Figma (grátis)</a>
+    <a class="vlink" href="https://www.youtube.com/results?search_query=wireframe+figma+iniciante+prototipo" target="_blank"><i class="ti ti-brand-youtube" aria-hidden="true"></i> Wireframe no Figma</a>
+  </div>
+
+  <div class="card">
+    <div class="ch"><div class="ci blue"><i class="ti ti-topology-star" aria-hidden="true"></i></div><div class="ct">Modelo de negócio — Lean Canvas (versão simplificada)</div></div>
+    <p style="margin-bottom:.7rem;font-size:13.5px;color:var(--color-text-secondary)">Preencha estes 6 campos no documento (não precisa ser o canvas visual — pode ser em forma de texto ou lista):</p>
+    <div class="canvas-grid">
+      <div class="canvas-block"><h5>Problema</h5><p>Os 1–3 principais problemas que a solução resolve</p></div>
+      <div class="canvas-block"><h5>Segmento de clientes</h5><p>Para quem a solução é feita? Quem é o usuário principal?</p></div>
+      <div class="canvas-block"><h5>Proposta de valor</h5><p>O que torna a solução diferente e relevante?</p></div>
+      <div class="canvas-block"><h5>Solução (MVP)</h5><p>As 3 funcionalidades ou capacidades principais</p></div>
+      <div class="canvas-block"><h5>Canais</h5><p>Como a solução chega ao usuário? App, plataforma web, serviço?</p></div>
+      <div class="canvas-block"><h5>Modelo de receita</h5><p>Quem paga? Assinatura, freemium, licença, serviço público?</p></div>
+    </div>
+    <a class="vlink" href="https://www.youtube.com/results?search_query=lean+canvas+como+preencher+startup+exemplos" target="_blank"><i class="ti ti-brand-youtube" aria-hidden="true"></i> Como preencher o Lean Canvas</a>
+  </div>
+</div>
+
+<!-- SEÇÃO 4: RESULTADOS -->
+<div class="sec" id="sec4">
+  <div class="sec-h">Seção 4 · Resultados Esperados e Hipóteses de Validação</div>
+  <div class="sec-s">O que o projeto vai entregar e como a solução poderia ser testada</div>
+
+  <div class="card">
+    <div class="ch"><div class="ci green"><i class="ti ti-chart-arrows" aria-hidden="true"></i></div><div class="ct">Estrutura desta seção</div><span class="cbg bgreen">~0,5 pág</span></div>
+    <p>Esta seção responde duas perguntas: <strong>(1) O que será produzido?</strong> e <strong>(2) Como saberíamos que funcionou?</strong></p>
+    <div class="step-list" style="margin-top:.7rem">
+      <div class="si"><div class="sn">1</div><div class="sc"><h4>Entregas concretas do projeto</h4><p>Liste o que o projeto vai produzir: documento do projeto, protótipo de telas, Lean Canvas, apresentação. Seja específico — evite resultados vagos como "melhorar a gestão".</p></div></div>
+      <div class="si"><div class="sn">2</div><div class="sc"><h4>Impacto esperado (para quem e quanto)</h4><p>Descreva o benefício direto para o público-alvo: "redução de X% no tempo de Y", "acesso de Z pessoas a um serviço antes inexistente". Se não há dados para dimensionar, use referências do benchmark.</p></div></div>
+      <div class="si"><div class="sn">3</div><div class="sc"><h4>Hipóteses de validação (mesmo sem teste real)</h4><p>Descreva <em>como</em> a solução seria testada se houvesse tempo/recursos. Isso demonstra maturidade no raciocínio de inovação.</p></div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><div class="ci purple"><i class="ti ti-test-pipe" aria-hidden="true"></i></div><div class="ct">Métodos de validação — mesmo sem tempo, descreva como faria</div></div>
+
+    <div class="tool-card">
+      <div class="tool-head"><div class="tool-num">1</div><div class="tool-title">Teste com Usuários (Prototipação)</div><span class="tool-tag">Viável em 30 dias</span></div>
+      <div class="tool-body"><p>Apresentar o protótipo de telas para 3–5 pessoas do público-alvo e observar se conseguem usá-lo sem ajuda. Anota confusões, dúvidas e reações. Ferramenta: Figma com link compartilhado. Custo: zero.</p></div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-head"><div class="tool-num">2</div><div class="tool-title">Teste de Fumaça (Smoke Test)</div><span class="tool-tag">Valida demanda</span></div>
+      <div class="tool-body"><p>Uma landing page simples (Google Sites, Notion, Carrd.co) descrevendo a solução e um botão "quero saber mais". Se pessoas clicam e deixam contato, a demanda existe — mesmo sem o produto pronto. Ideal para projetos de app ou plataforma.</p>
+      <a class="vlink" href="https://www.youtube.com/results?search_query=smoke+test+validacao+startup+landing+page" target="_blank"><i class="ti ti-brand-youtube" aria-hidden="true"></i> Smoke Test na prática</a></div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-head"><div class="tool-num">3</div><div class="tool-title">Wizard of Oz</div><span class="tool-tag">Simula a solução</span></div>
+      <div class="tool-body"><p>Simula o funcionamento da solução manualmente, sem tecnologia. Ex: para um chatbot, uma pessoa responde as mensagens "como se fosse o sistema". O usuário não sabe que é manual. Ótimo para validar se o conceito funciona antes de construir qualquer coisa.</p></div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-head"><div class="tool-num">4</div><div class="tool-title">Entrevistas de Solução</div><span class="tool-tag">Feedback direto</span></div>
+      <div class="tool-body"><p>Depois de ter o MVP conceitual, apresentá-lo para potenciais usuários e perguntar: "Isso resolveria seu problema? O que está faltando? Você pagaria por isso?" 3 entrevistas já geram insights relevantes.</p></div>
+    </div>
+
+    <div class="hbox"><p><strong>Se o grupo não conseguir validar:</strong> descreva no documento qual seria o plano de validação, quem seriam os usuários-teste, qual seria a métrica de sucesso e o critério de "aprovação" da hipótese. Isso já demonstra pensamento de produto maduro.</p></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><div class="ci teal"><i class="ti ti-flag-check" aria-hidden="true"></i></div><div class="ct">Considerações Finais e Referências</div><span class="cbg bteal">~0,25 pág + lista</span></div>
+    <p><strong>Considerações Finais:</strong> 1 parágrafo retomando a proposta, reconhecendo limitações do projeto (tempo, escopo, falta de validação real) e apontando próximos passos possíveis — como seria uma continuidade em fases posteriores.</p>
+    <p style="margin-top:.5rem"><strong>Referências:</strong> mínimo de 5 fontes. Inclua: artigos acadêmicos, relatórios setoriais, documentação de tecnologias, livros de metodologia (Lean Startup, Design Thinking) e fontes dos dados usados na seção de evidências.</p>
+  </div>
+</div>
+
+<!-- CRONOGRAMA -->
+<div class="sec" id="crono">
+  <div class="sec-h">Cronograma de 30 dias</div>
+  <div class="sec-s">Distribuição semanal das atividades e entregas</div>
+
+  <div class="card">
+    <div class="tl">
+      <div class="ti"><div class="td"></div><div class="tc">
+        <span class="dias-badge d1">Dias 1–7 · Semana 1</span>
+        <h4>Descoberta do problema</h4>
+        <p>Formação do grupo, escolha do tema. Aplicar Matriz CSD ou Árvore de Problemas. Primeiras buscas por evidências (desk research). Realização de 3–5 entrevistas exploratórias (se possível). Formulação do título e objetivo geral.</p>
+        <span class="tt">Entrega: título + objetivo + descrição do problema (1 parágrafo)</span>
+      </div></div>
+      <div class="ti"><div class="td"></div><div class="tc">
+        <span class="dias-badge d2">Dias 8–14 · Semana 2</span>
+        <h4>Evidências e empatia</h4>
+        <p>Pesquisa aprofundada: dados secundários, benchmarking de soluções existentes, survey rápido (opcional). Redação da seção de Evidências e Empatia. Redação final da Introdução e Justificativa.</p>
+        <span class="tt">Entrega: seções 1 e 2 redigidas</span>
+      </div></div>
+      <div class="ti"><div class="td"></div><div class="tc">
+        <span class="dias-badge d3">Dias 15–21 · Semana 3</span>
+        <h4>Solução, MVP e modelo de negócio</h4>
+        <p>Definição da solução tecnológica. Criação do MVP (prototipo de telas no Figma ou descrição conceitual detalhada). Preenchimento do Lean Canvas. Redação da seção de Metodologia/Desenvolvimento.</p>
+        <span class="tt">Entrega: seção 3 + protótipo/esboço do MVP</span>
+      </div></div>
+      <div class="ti"><div class="td"></div><div class="tc">
+        <span class="dias-badge d4">Dias 22–28 · Semana 4</span>
+        <h4>Resultados, validação e fechamento</h4>
+        <p>Redação de Resultados Esperados com hipóteses de validação. Considerações Finais. Lista de Referências. Revisão geral do documento, formatação e integração das seções.</p>
+        <span class="tt">Entrega: documento completo revisado</span>
+      </div></div>
+      <div class="ti"><div class="td"></div><div class="tc">
+        <span class="dias-badge d5">Dias 29–30</span>
+        <h4>Finalização e submissão</h4>
+        <p>Última revisão ortográfica e de formatação. Verificação do checklist. Submissão do projeto final.</p>
+        <span class="tt">Entrega final</span>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><div class="ci amber"><i class="ti ti-users" aria-hidden="true"></i></div><div class="ct">Divisão de tarefas sugerida por integrante</div></div>
+    <div class="g2">
+      <div class="mc"><h5>Integrante A</h5><p>Lidera a pesquisa de evidências e o benchmarking. Redige a seção de Evidências.</p></div>
+      <div class="mc"><h5>Integrante B</h5><p>Coordena as entrevistas ou survey. Redige Introdução e Justificativa.</p></div>
+      <div class="mc"><h5>Integrante C</h5><p>Lidera o desenho da solução e o Lean Canvas. Redige a Metodologia.</p></div>
+      <div class="mc"><h5>Integrante D/E</h5><p>Cria o protótipo/MVP. Redige Resultados, Considerações e Referências. Faz a revisão geral.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- TURMA -->
+<div class="sec" id="alunos">
+  <div class="sec-h">Panorama da turma</div>
+  <div class="sec-s">Grupos formados, preferências individuais e alunos a distribuir</div>
+
+  <div class="card">
+    <div class="ch"><div class="ci teal"><i class="ti ti-users-group" aria-hidden="true"></i></div><div class="ct">Grupos já formados (declarados)</div></div>
+    <div class="tool-card" style="margin-bottom:.6rem">
+      <div class="tool-head"><div class="tool-num" style="background:#E1F5EE;color:#085041">G1</div><div class="tool-title">Grupo IA/Educação — Santiago/SJP</div><span class="tool-tag" style="background:#E1F5EE;color:#085041">5 integrantes</span></div>
+      <div class="tool-body"><p>Ítalo de Paula Casemiro · Daniela Nakagawa · Mariana Olivia Donato Leite · Patricia Luiza Schuh · Andressa Ayako Sada da Silva</p><p style="margin-top:.3rem"><em>Ideia declarada: Sistema de inteligência contínua para docentes do ensino superior (IA)</em></p></div>
+    </div>
+    <div class="tool-card" style="margin-bottom:.6rem">
+      <div class="tool-head"><div class="tool-num" style="background:#E1F5EE;color:#085041">G2</div><div class="tool-title">Grupo Cuidadores/Conecta — Candelária/Uruguaiana</div><span class="tool-tag" style="background:#E1F5EE;color:#085041">5–6 integrantes</span></div>
+      <div class="tool-body"><p>Israel Aparecido Messias Junior · Joseany Pereira de Sousa · Rosane Oliveira de Souza · Danielle Cristiny Andrade Rodrigues + Lucas Anjo do Nascimento* · Tatiane de Macêdo Silva*</p><p style="margin-top:.3rem"><em>Ideia declarada: Plataforma para conectar cuidadores de idosos e familiares</em></p><p style="margin-top:.25rem;font-size:12px;color:var(--color-text-tertiary)">*Nomes mencionados mas sem resposta no formulário</p></div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-head"><div class="tool-num" style="background:#EEEDFE;color:#534AB7">G?</div><div class="tool-title">Grupo Lilian Santos — Santiago</div><span class="tool-tag" style="background:#EEEDFE;color:#534AB7">Parcialmente formado</span></div>
+      <div class="tool-body"><p>Lilian da Silva Santos + "Júnior Messias, Matheus Prates e Yuri Rocha" (citados mas com sobreposição com G2 — verificar com os alunos)</p><p style="margin-top:.3rem"><em>Ideia: Treinamento para Agentes de Inovação — SC Mais Inovação / FAPESC</em></p></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><div class="ci amber"><i class="ti ti-user" aria-hidden="true"></i></div><div class="ct">Alunos com preferência individual declarada</div></div>
+    <p style="font-size:13px;color:var(--color-text-secondary);margin-bottom:.7rem">Solicitaram desenvolver o projeto individualmente — verificar com a coordenação se há permissão:</p>
+    <table class="aluno-table">
+      <tr><th>Nome</th><th>Polo</th><th>Tema/Ideia</th></tr>
+      <tr><td>Klélson Rodrigues do Carmo</td><td><span class="polo-tag">Uruguaiana</span></td><td>Dashboard de consumo de impressão</td></tr>
+      <tr><td>Paulo Sergio Cabral</td><td><span class="polo-tag">SJP</span></td><td>App acessibilidade visual</td></tr>
+      <tr><td>Caio de Oliveira Barbosa</td><td><span class="polo-tag">Candelária</span></td><td>Rebobinamento de motores (projeto confidencial)</td></tr>
+      <tr><td>Steffano Marinho Alves</td><td><span class="polo-tag">Uruguaiana</span></td><td>Detecção de antibióticos na água (IoT)</td></tr>
+      <tr><td>Sabrina Delamore de Souza</td><td><span class="polo-tag">São Gabriel</span></td><td>Gestão de contratos industriais (estudo de caso)</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="ch"><div class="ci coral"><i class="ti ti-user-question" aria-hidden="true"></i></div><div class="ct">Alunos a distribuir — sem grupo declarado</div></div>
+    <p style="font-size:13px;color:var(--color-text-secondary);margin-bottom:.7rem">Agrupados por afinidade temática para facilitar a distribuição:</p>
+    <div class="wbox"><p><strong>Nota:</strong> há 4 respostas sem nome identificado e 3 alunos com respostas duplicadas (Isaac Felix, Maikel Carvalho, Danielle Rodrigues). Recomenda-se confirmar a lista final com a chamada em aula antes de fechar os grupos.</p></div>
+
+    <div style="margin-top:.75rem">
+      <div style="font-size:12px;font-weight:500;color:var(--color-text-secondary);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.05em">Perfil IA + Gestão</div>
+      <table class="aluno-table" style="margin-bottom:.9rem">
+        <tr><th>Nome</th><th>Polo</th><th>Interesses</th></tr>
+        <tr><td>Izabel Cristina Silva Oliveira</td><td><span class="polo-tag">Santiago</span></td><td>IA, Gestão, Transformação digital</td></tr>
+        <tr><td>Eduardo Mariano dos Santos Lima</td><td><span class="polo-tag">Candelária</span></td><td>IA, Gestão, Planejamento Estratégico</td></tr>
+        <tr><td>Grascielly Coelho Dias Miranda</td><td><span class="polo-tag">SJP</span></td><td>IA, Gestão, Planejamento</td></tr>
+        <tr><td>Karla Ariane da Silva Alves</td><td><span class="polo-tag">Uruguaiana</span></td><td>IA, Gestão, Sistemas</td></tr>
+        <tr><td>Fernando Tobio Emmerich</td><td><span class="polo-tag">Candelária</span></td><td>IA, Auditoria pública, Análise de dados</td></tr>
+        <tr><td>Regina Maria Alves Rodrigues</td><td><span class="polo-tag">Uruguaiana</span></td><td>IA, Gestão educacional, Automação</td></tr>
+      </table>
+
+      <div style="font-size:12px;font-weight:500;color:var(--color-text-secondary);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.05em">Perfil Dados + Dashboard + Analytics</div>
+      <table class="aluno-table" style="margin-bottom:.9rem">
+        <tr><th>Nome</th><th>Polo</th><th>Interesses</th></tr>
+        <tr><td>Elivelton Souza Santos</td><td><span class="polo-tag">SJP</span></td><td>Dashboard, Power BI, KPIs</td></tr>
+        <tr><td>Rafael Cortes de Oliveira</td><td><span class="polo-tag">Santiago</span></td><td>Dados, Agronegócio, IA</td></tr>
+        <tr><td>Letícia Paredes Subtil</td><td><span class="polo-tag">São Gabriel</span></td><td>Dashboard, Análise de dados</td></tr>
+        <tr><td>Clefea Correa Pacheco</td><td><span class="polo-tag">Uruguaiana</span></td><td>IA, Dados, Gestão</td></tr>
+        <tr><td>Vitor Augusto Petaccia Dias</td><td><span class="polo-tag">SJP</span></td><td>IA, Dados, Inovação</td></tr>
+      </table>
+
+      <div style="font-size:12px;font-weight:500;color:var(--color-text-secondary);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.05em">Perfil Gestão + Negócios + Estratégia</div>
+      <table class="aluno-table" style="margin-bottom:.9rem">
+        <tr><th>Nome</th><th>Polo</th><th>Interesses</th></tr>
+        <tr><td>Isaac Felix Bernardino</td><td><span class="polo-tag">São Gabriel</span></td><td>Gestão, Inovação, Empreendedorismo</td></tr>
+        <tr><td>Ludmila Neves de Oliveira</td><td><span class="polo-tag">Candelária</span></td><td>Gestão, Lean/Canvas</td></tr>
+        <tr><td>Sônia Aparecida dos Santos</td><td><span class="polo-tag">São Gabriel</span></td><td>Gestão, Educação, Sustentabilidade</td></tr>
+        <tr><td>Victor Filipe Nicácio Fontinele</td><td><span class="polo-tag">Candelária</span></td><td>Lean Manufacturing, Gestão</td></tr>
+        <tr><td>Marcos Cezar Souza Tognolli</td><td><span class="polo-tag">Uruguaiana</span></td><td>Gestão, Lean, Ágil</td></tr>
+        <tr><td>Betânia Mendes Francisco</td><td><span class="polo-tag">Santiago</span></td><td>Transformação digital, Setor público</td></tr>
+        <tr><td>Daiane Araújo de Oliveira</td><td><span class="polo-tag">SJP</span></td><td>RH, Gestão, Lean</td></tr>
+        <tr><td>Aquila Gisely da Silva Araújo</td><td><span class="polo-tag">São Gabriel</span></td><td>Sustentabilidade, Empreendedorismo (sem grupo)</td></tr>
+      </table>
+
+      <div style="font-size:12px;font-weight:500;color:var(--color-text-secondary);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.05em">Perfil Tecnologia + Inovação Social</div>
+      <table class="aluno-table">
+        <tr><th>Nome</th><th>Polo</th><th>Interesses</th></tr>
+        <tr><td>Ney Cristina Oliveira</td><td><span class="polo-tag">São Gabriel</span></td><td>IA, App mobile, Inovação</td></tr>
+        <tr><td>Sérgio Jesus de Souza</td><td><span class="polo-tag">Candelária</span></td><td>IA, App, Segurança da informação</td></tr>
+        <tr><td>LUCIANO SALTON ROSSATTO</td><td><span class="polo-tag">Uruguaiana</span></td><td>IA, TI avançado, ESG</td></tr>
+        <tr><td>Carla Alessandra Fernandes</td><td><span class="polo-tag">Candelária</span></td><td>Inovação social, Saúde, App</td></tr>
+        <tr><td>Dhiany Stefani da Silva Alves</td><td><span class="polo-tag">São Gabriel</span></td><td>App, Ecossistema tecnológico</td></tr>
+        <tr><td>Matheus Souza Silva</td><td><span class="polo-tag">Uruguaiana</span></td><td>App navegação campus (projeto definido)</td></tr>
+        <tr><td>Felipe Lopes Dib</td><td><span class="polo-tag">Santiago</span></td><td>IA generativa, Atendimento digital (projeto definido)</td></tr>
+        <tr><td>Luiz Gustavo Paulon Rezende</td><td><span class="polo-tag">Uruguaiana</span></td><td>Sustentabilidade, Agronegócio, Resíduos</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><div class="ci blue"><i class="ti ti-info-circle" aria-hidden="true"></i></div><div class="ct">Atenção — itens a confirmar</div></div>
+    <ul>
+      <li style="font-size:13px;color:var(--color-text-secondary);margin-bottom:5px"><strong>4 respostas sem nome:</strong> confirmadas as cidades Uruguaiana (×2), São Gabriel e Santiago. Identificar com os alunos.</li>
+      <li style="font-size:13px;color:var(--color-text-secondary);margin-bottom:5px"><strong>Duplicatas a limpar:</strong> Isaac Felix (2×), Danielle Cristiny (2×), Maikel Luiz (2×), Caio Barbosa (2×). Manter apenas uma resposta de cada.</li>
+      <li style="font-size:13px;color:var(--color-text-secondary);margin-bottom:5px"><strong>Sobreposição G2/G-Lilian:</strong> Israel Messias Junior aparece no grupo de Lilian Santos como "Júnior Messias" — verificar se é o mesmo aluno e a qual grupo pertence.</li>
+      <li style="font-size:13px;color:var(--color-text-secondary)"><strong>Total de respostas válidas:</strong> ~63 alunos identificados em ~55 nomes únicos.</li>
+    </ul>
+    <button class="ab" onclick="sendPrompt('Com base na lista de alunos da turma, me ajude a montar grupos de 4 a 5 pessoas por afinidade de tema e polo, considerando os grupos já formados.')">
+      <i class="ti ti-sparkles" aria-hidden="true"></i> Montar grupos por afinidade ↗
+    </button>
+  </div>
+</div>
+
+</div>
+
+<script>
+function show(id){
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
