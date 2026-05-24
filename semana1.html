@@ -1,1 +1,943 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Semana 1 · Seção 1 — Introdução, Justificativa e Objetivo</title>
+<style>
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #1a1a1a;
+  background: #f0f2f5;
+}
+
+.wrap {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 4rem;
+}
+
+/* ── Hero banner ── */
+.hero {
+  background: linear-gradient(135deg, #0C447C 0%, #185FA5 60%, #1a78c2 100%);
+  border-radius: 14px;
+  padding: 2rem 2rem 1.75rem;
+  margin-bottom: 1.75rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  right: -40px; top: -40px;
+  width: 220px; height: 220px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.06);
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  right: 60px; bottom: -60px;
+  width: 160px; height: 160px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.04);
+}
+.hero-tag {
+  font-size: 11px;
+  font-weight: 700;
+  color: #93c5fd;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin-bottom: .5rem;
+}
+.hero h1 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.25;
+  margin-bottom: .5rem;
+}
+.hero-sub {
+  font-size: 14px;
+  color: #bfdbfe;
+  margin-bottom: 1.25rem;
+}
+.hero-dates {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.date-pill {
+  background: rgba(255,255,255,.15);
+  border: 1px solid rgba(255,255,255,.25);
+  border-radius: 20px;
+  padding: 4px 13px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+}
+.date-pill.green { background: rgba(16,185,129,.25); border-color: rgba(16,185,129,.4); }
+
+/* ── Progress bar ── */
+.progress-wrap {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.75rem;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 4px rgba(0,0,0,.04);
+}
+.progress-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  margin-bottom: .6rem;
+}
+.progress-track {
+  display: flex;
+  gap: 4px;
+  margin-bottom: .5rem;
+}
+.progress-step {
+  flex: 1;
+  height: 8px;
+  border-radius: 4px;
+  background: #e5e7eb;
+}
+.progress-step.done { background: #185FA5; }
+.progress-step.current { background: #93c5fd; }
+.progress-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #9ca3af;
+}
+.progress-labels span.active { color: #185FA5; font-weight: 700; }
+
+/* ── Section titles ── */
+.sec-title {
+  font-size: 19px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: .2rem;
+  margin-top: 2rem;
+}
+.sec-sub {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 1.25rem;
+  padding-bottom: .65rem;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+/* ── Cards ── */
+.card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1.1rem 1.3rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,.04);
+}
+.card p, .card li { font-size: 13.5px; line-height: 1.7; color: #374151; }
+.card ul, .card ol { padding-left: 1.3rem; }
+.card li { margin-bottom: 5px; }
+.card strong { color: #111; }
+.card h4 { font-size: 14.5px; font-weight: 700; color: #111; margin-bottom: .4rem; }
+
+.card-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: .8rem;
+  flex-wrap: wrap;
+}
+.card-icon {
+  width: 34px; height: 34px;
+  border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px; flex-shrink: 0;
+}
+.card-icon.blue   { background: #dbeafe; }
+.card-icon.teal   { background: #d1fae5; }
+.card-icon.amber  { background: #fef3c7; }
+.card-icon.coral  { background: #fee2e2; }
+.card-icon.purple { background: #ede9fe; }
+.card-icon.green  { background: #dcfce7; }
+.card-icon.slate  { background: #f1f5f9; }
+.card-title { font-size: 15px; font-weight: 700; color: #111; flex: 1; }
+.badge {
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 20px;
+  padding: 3px 10px;
+  white-space: nowrap;
+}
+.badge-blue   { background: #dbeafe; color: #1e3a8a; }
+.badge-teal   { background: #d1fae5; color: #064e3b; }
+.badge-amber  { background: #fef3c7; color: #78350f; }
+.badge-coral  { background: #fee2e2; color: #7f1d1d; }
+.badge-purple { background: #ede9fe; color: #4c1d95; }
+.badge-green  { background: #dcfce7; color: #14532d; }
+
+/* ── Alert boxes ── */
+.box {
+  border-radius: 0 10px 10px 0;
+  padding: .75rem 1rem;
+  margin: .75rem 0;
+}
+.box-blue  { border-left: 3px solid #185FA5; background: #eff6ff; }
+.box-blue p  { font-size: 13px; color: #1e40af; }
+.box-blue strong { color: #1e3a8a; }
+.box-amber { border-left: 3px solid #d97706; background: #fffbeb; }
+.box-amber p { font-size: 13px; color: #92400e; }
+.box-amber strong { color: #78350f; }
+.box-teal  { border-left: 3px solid #059669; background: #ecfdf5; }
+.box-teal p  { font-size: 13px; color: #065f46; }
+.box-teal strong { color: #064e3b; }
+.box-red   { border-left: 3px solid #dc2626; background: #fef2f2; }
+.box-red p   { font-size: 13px; color: #991b1b; }
+
+/* ── Example block ── */
+.example {
+  background: #f8fafc;
+  border-radius: 10px;
+  padding: .8rem 1rem;
+  margin: .75rem 0;
+}
+.example-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  margin-bottom: .35rem;
+}
+.example p { font-size: 13px; color: #1f2937; line-height: 1.7; font-style: italic; }
+.example p strong { font-style: normal; color: #185FA5; }
+
+/* ── Steps ── */
+.steps { margin: .5rem 0; }
+.step-item { display: flex; gap: 12px; margin-bottom: 1rem; }
+.step-num {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: #185FA5; color: #fff;
+  font-size: 13px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 2px;
+}
+.step-content h4 { font-size: 14px; font-weight: 700; margin-bottom: 3px; }
+.step-content p  { font-size: 13px; color: #4b5563; line-height: 1.65; }
+
+/* ── Grid 2 col ── */
+.g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: .75rem 0; }
+@media(max-width:560px){ .g2 { grid-template-columns: 1fr; } }
+.mini-card { background: #f8fafc; border-radius: 10px; padding: .8rem 1rem; }
+.mini-card h5 { font-size: 13px; font-weight: 700; margin-bottom: 4px; color: #111; }
+.mini-card p  { font-size: 12.5px; color: #6b7280; line-height: 1.55; }
+
+/* ── Comparison table ── */
+.comp-table { width: 100%; border-collapse: collapse; margin: .75rem 0; font-size: 13px; }
+.comp-table th {
+  background: #185FA5; color: #fff;
+  padding: 8px 10px; text-align: left;
+  font-size: 12px; font-weight: 700; letter-spacing: .04em;
+}
+.comp-table th:first-child { border-radius: 8px 0 0 0; }
+.comp-table th:last-child  { border-radius: 0 8px 0 0; }
+.comp-table td { padding: 8px 10px; border-bottom: 1px solid #f0f0f0; color: #374151; vertical-align: top; }
+.comp-table tr:nth-child(even) td { background: #f8fafc; }
+.comp-table tr:last-child td { border-bottom: none; }
+.comp-table .bad  { color: #dc2626; font-weight: 700; }
+.comp-table .good { color: #059669; font-weight: 700; }
+
+/* ── Checklist ── */
+.checklist { list-style: none; padding: 0; }
+.checklist li {
+  display: flex; gap: 9px; align-items: flex-start;
+  font-size: 13.5px; color: #374151;
+  padding: 7px 0; border-bottom: 1px solid #f3f4f6;
+}
+.checklist li:last-child { border-bottom: none; }
+.check-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+.check-icon.done  { color: #059669; }
+.check-icon.warn  { color: #d97706; }
+
+/* ── Tool card ── */
+.tool-card {
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: .9rem 1rem;
+  margin-bottom: .75rem;
+}
+.tool-head { display: flex; align-items: center; gap: 9px; margin-bottom: .5rem; flex-wrap: wrap; }
+.tool-num {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: #ede9fe; color: #5b21b6;
+  font-size: 12px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.tool-title { font-size: 14px; font-weight: 700; color: #111; flex: 1; }
+.tool-tag {
+  font-size: 11px; background: #ede9fe; color: #4c1d95;
+  border-radius: 20px; padding: 2px 9px; font-weight: 700;
+}
+.tool-body p { font-size: 13px; color: #4b5563; line-height: 1.65; margin-bottom: .4rem; }
+
+/* ── Link buttons ── */
+.link-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: #fff3f0; border: 1px solid #fca5a5;
+  border-radius: 8px; padding: 5px 12px;
+  font-size: 12px; color: #991b1b; font-weight: 700;
+  text-decoration: none; margin: .2rem .1rem;
+  transition: background .15s;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.link-btn:hover { background: #fee2e2; }
+.link-btn.blue {
+  background: #eff6ff; border-color: #93c5fd;
+  color: #1e40af;
+}
+.link-btn.blue:hover { background: #dbeafe; }
+.link-btn.green {
+  background: #f0fdf4; border-color: #86efac;
+  color: #14532d;
+}
+.link-btn.green:hover { background: #dcfce7; }
+
+/* ── Activity box ── */
+.activity {
+  background: #fff;
+  border: 2px solid #185FA5;
+  border-radius: 14px;
+  padding: 1.25rem 1.4rem;
+  margin: 1.5rem 0;
+  position: relative;
+}
+.activity-label {
+  position: absolute;
+  top: -13px; left: 18px;
+  background: #185FA5;
+  color: #fff;
+  font-size: 11px; font-weight: 700;
+  border-radius: 20px; padding: 2px 12px;
+  letter-spacing: .06em; text-transform: uppercase;
+}
+.activity h3 { font-size: 16px; font-weight: 700; margin-bottom: .5rem; color: #0C447C; }
+.activity p, .activity li { font-size: 13.5px; color: #374151; line-height: 1.7; }
+.activity ul { padding-left: 1.3rem; margin-top: .4rem; }
+.activity li { margin-bottom: 4px; }
+.activity-footer {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin-top: 1rem; padding-top: .75rem;
+  border-top: 1px solid #dbeafe;
+  align-items: center;
+}
+.activity-footer span { font-size: 12px; color: #6b7280; }
+.activity-footer strong { color: #185FA5; }
+
+/* ── Template download box ── */
+.download-box {
+  background: linear-gradient(135deg, #0C447C, #185FA5);
+  border-radius: 14px;
+  padding: 1.25rem 1.4rem;
+  margin: 1.5rem 0;
+  display: flex; align-items: center; gap: 1.25rem;
+  flex-wrap: wrap;
+}
+.download-icon { font-size: 40px; flex-shrink: 0; }
+.download-text h3 { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: .3rem; }
+.download-text p { font-size: 13px; color: #bfdbfe; }
+.download-btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: #fff; border-radius: 8px;
+  padding: 8px 18px; font-size: 13px; font-weight: 700;
+  color: #185FA5; text-decoration: none;
+  white-space: nowrap; margin-top: .4rem;
+  transition: background .15s;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.download-btn:hover { background: #dbeafe; }
+
+/* ── Timeline ── */
+.timeline { position: relative; }
+.tl-item { display: flex; gap: 14px; margin-bottom: 1.1rem; }
+.tl-dot {
+  width: 13px; height: 13px; border-radius: 50%;
+  background: #185FA5; margin-top: 4px; flex-shrink: 0;
+  position: relative;
+}
+.tl-dot.current { background: #10b981; box-shadow: 0 0 0 3px #d1fae5; }
+.tl-dot::after {
+  content: ''; position: absolute;
+  left: 5px; top: 13px;
+  width: 2px; height: calc(100% + 14px);
+  background: #d1d5db;
+}
+.tl-item:last-child .tl-dot::after { display: none; }
+.tl-content h4 { font-size: 14px; font-weight: 700; color: #111; }
+.tl-content p  { font-size: 13px; color: #6b7280; margin-top: 2px; line-height: 1.55; }
+.tl-tag {
+  font-size: 11px; background: #f1f5f9;
+  border: 1px solid #e2e8f0; border-radius: 20px;
+  padding: 2px 9px; color: #64748b;
+  display: inline-block; margin-top: 4px;
+}
+.tl-tag.green { background: #dcfce7; border-color: #86efac; color: #14532d; font-weight: 700; }
+
+/* ── Responsive ── */
+@media(max-width:600px){
+  .hero h1 { font-size: 20px; }
+  .download-box { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ═══════════ HERO ═══════════ -->
+  <div class="hero">
+    <div class="hero-tag">Elaboração e Gerenciamento de Projetos Tecnológicos</div>
+    <h1>Semana 1 · Como escrever a Seção 1<br>Introdução, Justificativa e Objetivo</h1>
+    <p class="hero-sub">Material de apoio para a construção da primeira parte do seu projeto tecnológico</p>
+    <div class="hero-dates">
+      <span class="date-pill">📅 25 a 31 de maio de 2025</span>
+      <span class="date-pill green">✅ Entrega: até 31/05</span>
+      <span class="date-pill">📄 Seção 1 do projeto</span>
+    </div>
+  </div>
+
+  <!-- ═══════════ PROGRESSO ═══════════ -->
+  <div class="progress-wrap">
+    <div class="progress-title">Progresso do projeto — 30 dias</div>
+    <div class="progress-track">
+      <div class="progress-step current"></div>
+      <div class="progress-step"></div>
+      <div class="progress-step"></div>
+      <div class="progress-step"></div>
+    </div>
+    <div class="progress-labels">
+      <span class="active">Semana 1<br>Introdução</span>
+      <span>Semana 2<br>Evidências</span>
+      <span>Semana 3<br>Solução/MVP</span>
+      <span>Semana 4<br>Resultados</span>
+    </div>
+  </div>
+
+  <!-- ═══════════ TEMPLATE DOWNLOAD ═══════════ -->
+  <div class="download-box">
+    <div class="download-icon">📄</div>
+    <div class="download-text" style="flex:1">
+      <h3>Template do Projeto — Arquivo Word</h3>
+      <p>Baixe o modelo oficial para preencher durante a disciplina. Contém todas as seções com instruções e campo para o Lean Canvas.</p>
+    </div>
+    <a class="download-btn" href="https://docs.google.com/document/d/1tuEZGgrDRrHr_pB0oN4L4QzdE1JULpiARmqBzTXzP90" download>
+      ⬇ Acessar template (Google Docs)
+    </a>
+  </div>
+
+  <!-- ═══════════ O QUE VOCÊ PRECISA ENTREGAR ═══════════ -->
+  <div class="sec-title">O que você precisa entregar esta semana</div>
+  <div class="sec-sub">Seção 1 do projeto — 3 elementos fundamentais</div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-icon blue">🎯</div>
+      <div class="card-title">Entrega da Semana 1</div>
+      <span class="badge badge-blue">~0,5 a 0,75 página</span>
+    </div>
+    <p>Ao final desta semana, o seu grupo deve ter redigido a <strong>Seção 1 do projeto</strong>, composta por três elementos em sequência:</p>
+
+    <div class="steps" style="margin-top:.9rem">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>Introdução e contexto</h4>
+          <p>Apresentação do cenário onde o problema está inserido. Quem é afetado, em qual setor/contexto, e qual é o tamanho do problema.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>Justificativa</h4>
+          <p>Por que este problema precisa ser resolvido agora? Qual é a relevância social, econômica, tecnológica ou organizacional da proposta?</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>Objetivo Geral (+ objetivos específicos opcionais)</h4>
+          <p>Em 1 ou 2 frases: o que o projeto propõe fazer, para quem e com qual finalidade.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="box box-teal">
+      <p><strong>Volume esperado:</strong> esta seção inteira cabe em 0,5 a 0,75 página. Seja direto, objetivo e evite parágrafos de enrolação. Qualidade importa mais que quantidade.</p>
+    </div>
+  </div>
+
+  <!-- ═══════════ COMO ESCREVER CADA PARTE ═══════════ -->
+  <div class="sec-title">Como escrever cada parte</div>
+  <div class="sec-sub">Passo a passo com exemplos práticos</div>
+
+  <!-- INTRODUÇÃO -->
+  <div class="card">
+    <div class="card-head">
+      <div class="card-icon blue">✍</div>
+      <div class="card-title">Parte 1 · Introdução — apresente o problema diretamente</div>
+    </div>
+
+    <p>O primeiro parágrafo do projeto é o mais importante: ele define o que você vai resolver. Não perca espaço com histórico da internet ou da globalização. <strong>Vá direto ao problema.</strong></p>
+
+    <div style="margin-top:.9rem">
+      <table class="comp-table">
+        <tr>
+          <th>❌ Como NÃO começar</th>
+          <th>✅ Como começar bem</th>
+        </tr>
+        <tr>
+          <td class="bad">"Vivemos em um mundo cada vez mais tecnológico e globalizado, onde as transformações digitais impactam todos os setores..."</td>
+          <td class="good">"Produtores rurais da região Sul enfrentam perdas anuais de até 20% na produção por falta de acesso a ferramentas de monitoramento de solo de baixo custo."</td>
+        </tr>
+        <tr>
+          <td class="bad">"Com o avanço da inteligência artificial, surgem novas possibilidades para a sociedade..."</td>
+          <td class="good">"Estudantes ingressantes no campus do IFF Uruguaiana perdem em média 15 minutos por aula buscando salas, gerando atrasos e desorganização no início das atividades."</td>
+        </tr>
+        <tr>
+          <td class="bad">"A gestão é fundamental para o sucesso das organizações modernas..."</td>
+          <td class="good">"Equipes de atendimento digital gastam até 40% do tempo respondendo perguntas repetitivas, problema que poderia ser automatizado com IA generativa."</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="box box-blue">
+      <p><strong>Fórmula da abertura direta:</strong><br>
+      [Público afetado] + [sofre/enfrenta/perde] + [problema específico] + [evidência ou dado] + [causa ou agravante].</p>
+    </div>
+
+    <p style="margin-top:.75rem">Após a abertura, o segundo parágrafo contextualiza: onde esse problema ocorre, por que persiste e quais são suas consequências principais.</p>
+  </div>
+
+  <!-- JUSTIFICATIVA -->
+  <div class="card">
+    <div class="card-head">
+      <div class="card-icon amber">⚖️</div>
+      <div class="card-title">Parte 2 · Justificativa — por que resolver este problema?</div>
+    </div>
+
+    <p>A justificativa responde uma única pergunta: <strong>por que este projeto merece existir?</strong> Ela convence o leitor de que o problema tem relevância suficiente para ser resolvido agora.</p>
+
+    <div class="g2" style="margin-top:.9rem">
+      <div class="mini-card">
+        <h5>📊 Argumento por dados</h5>
+        <p>Cite um número, estatística ou pesquisa que dê escala ao problema. "Segundo o SEBRAE (2024), 60% das MPEs..."</p>
+      </div>
+      <div class="mini-card">
+        <h5>👥 Argumento por impacto</h5>
+        <p>Mostre quem sofre e como. Quanto mais específico o perfil do afetado, mais forte o argumento.</p>
+      </div>
+      <div class="mini-card">
+        <h5>🔧 Argumento por lacuna</h5>
+        <p>Mostre que as soluções atuais são insuficientes ou inacessíveis para este público.</p>
+      </div>
+      <div class="mini-card">
+        <h5>🌱 Argumento por oportunidade</h5>
+        <p>Mostre que existe tecnologia disponível para resolver o problema de forma nova ou mais acessível.</p>
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="example-label">Exemplo de justificativa bem construída</div>
+      <p>"A ausência de ferramentas digitais acessíveis para gestão de cuidadores de idosos representa um gargalo crítico para famílias de baixa e média renda. Segundo dados do IBGE (2023), o Brasil possui mais de 31 milhões de idosos, e apenas 12% das famílias que necessitam de cuidadores profissionais têm acesso a plataformas de contratação segura. As soluções existentes no mercado são voltadas a planos empresariais ou requerem intermediação presencial, tornando-se inviáveis para a maioria da população. <strong>Este projeto se justifica pela necessidade de democratizar o acesso a cuidadores qualificados por meio de uma plataforma digital inclusiva e de baixo custo.</strong>"</p>
+    </div>
+
+    <div class="box box-amber">
+      <p><strong>Atenção:</strong> a justificativa não é o lugar para descrever a solução. Concentre-se no problema. A solução aparece no Objetivo Geral, logo a seguir.</p>
+    </div>
+  </div>
+
+  <!-- OBJETIVO GERAL -->
+  <div class="card">
+    <div class="card-head">
+      <div class="card-icon teal">🎯</div>
+      <div class="card-title">Parte 3 · Objetivo Geral — o que o projeto vai fazer</div>
+    </div>
+
+    <p>O objetivo geral é a declaração central do projeto. Deve ser <strong>específico, alcançável e mensurável</strong>. Em projetos de inovação, ele descreve a solução proposta em uma frase bem estruturada.</p>
+
+    <div class="box box-blue" style="margin:.9rem 0">
+      <p><strong>Fórmula:</strong><br>
+      <em>"[Verbo no infinitivo] + [o que será desenvolvido/proposto] + [para quem] + [com qual finalidade ou resultado esperado]."</em></p>
+    </div>
+
+    <div class="example">
+      <div class="example-label">Exemplos por tipo de projeto</div>
+      <p>🌾 Agronegócio: <strong>"Desenvolver</strong> um modelo conceitual de aplicativo mobile com IA para gestão estratégica de propriedades rurais, <strong>visando</strong> apoiar pequenos produtores na tomada de decisões com base em dados de solo e clima."</p>
+    </div>
+    <div class="example">
+      <p>🏥 Saúde: <strong>"Propor</strong> uma plataforma digital para conexão entre cuidadores de idosos e famílias, <strong>com o objetivo de</strong> facilitar o acesso a profissionais qualificados de forma segura e acessível."</p>
+    </div>
+    <div class="example">
+      <p>🏛 Setor público: <strong>"Elaborar</strong> uma proposta de ferramenta de IA generativa para apoio operacional em processos de atendimento e moderação digital, <strong>buscando</strong> aumentar a eficiência e padronizar as respostas institucionais."</p>
+    </div>
+    <div class="example">
+      <p>🎓 Educação: <strong>"Desenvolver</strong> um sistema de inteligência contínua baseado em IA para atualização de conteúdos de docentes do ensino superior, <strong>com foco em</strong> reduzir o tempo de curadoria e aumentar a relevância do material didático."</p>
+    </div>
+
+    <div style="margin-top:1rem">
+      <p style="font-size:13.5px;color:#374151;margin-bottom:.6rem"><strong>Verbos recomendados para o objetivo geral:</strong></p>
+      <div style="display:flex;flex-wrap:wrap;gap:6px">
+        <span class="badge badge-blue">Desenvolver</span>
+        <span class="badge badge-teal">Propor</span>
+        <span class="badge badge-amber">Elaborar</span>
+        <span class="badge badge-purple">Criar</span>
+        <span class="badge badge-green">Implementar</span>
+        <span class="badge badge-coral">Analisar</span>
+        <span class="badge badge-blue">Modelar</span>
+        <span class="badge badge-teal">Projetar</span>
+        <span class="badge badge-amber">Conceber</span>
+        <span class="badge badge-purple">Estruturar</span>
+      </div>
+    </div>
+
+    <div class="box box-teal" style="margin-top:.9rem">
+      <p><strong>Objetivos específicos (opcional mas recomendado):</strong> liste 2 a 3 objetivos menores que, juntos, compõem o objetivo geral. Cada um deve começar com um verbo diferente e representar uma etapa do projeto. Ex: "Identificar as principais lacunas das soluções existentes; Modelar as funcionalidades essenciais do MVP; Elaborar o Lean Canvas do modelo de negócio."</p>
+    </div>
+  </div>
+
+  <!-- ═══════════ FERRAMENTAS PARA DEFINIR O PROBLEMA ═══════════ -->
+  <div class="sec-title">Ferramentas para definir e validar o problema</div>
+  <div class="sec-sub">Use ao menos uma antes de escrever a introdução</div>
+
+  <div class="card">
+    <p>Antes de escrever, o grupo precisa ter clareza sobre qual problema está atacando. Essas ferramentas ajudam a alinhar o time e aprofundar o entendimento do problema em pouco tempo.</p>
+
+    <div style="margin-top:1rem">
+
+      <div class="tool-card">
+        <div class="tool-head">
+          <div class="tool-num">1</div>
+          <div class="tool-title">Matriz CSD — Certezas, Suposições e Dúvidas</div>
+          <span class="tool-tag">⏱ 30 min</span>
+        </div>
+        <div class="tool-body">
+          <p>Crie três colunas: <strong>o que sabemos com certeza</strong> sobre o problema, <strong>o que supomos</strong> (mas precisamos confirmar) e <strong>o que não sabemos</strong>. Cada membro do grupo preenche individualmente e depois o grupo discute juntos.</p>
+          <p><strong>Para que serve aqui:</strong> as "dúvidas" viram perguntas a pesquisar esta semana, e as "suposições" viram hipóteses para a seção de evidências na semana 2.</p>
+          <a class="link-btn" href="https://www.youtube.com/results?search_query=matriz+CSD+design+thinking+portugues+como+usar" target="_blank" rel="noopener">
+            ▶ Assistir: Matriz CSD no YouTube
+          </a>
+        </div>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-head">
+          <div class="tool-num">2</div>
+          <div class="tool-title">5 Porquês — chegue à causa raiz</div>
+          <span class="tool-tag">⏱ 15 min</span>
+        </div>
+        <div class="tool-body">
+          <p>Enuncie o problema e pergunte "por quê isso acontece?" cinco vezes seguidas. Cada resposta vira a base da próxima pergunta. O objetivo é sair do sintoma e chegar à causa raiz — que é o que o projeto deve atacar.</p>
+          <p><strong>Exemplo rápido:</strong> "Idosos ficam sem cuidador" → Por quê? "Famílias não sabem onde encontrar" → Por quê? "Não há plataforma de busca acessível" → Por quê? "As existentes são caras ou complexas" → <em>aqui está o problema real.</em></p>
+          <a class="link-btn" href="https://www.youtube.com/results?search_query=5+porques+causa+raiz+lean+toyota+exemplos" target="_blank" rel="noopener">
+            ▶ Assistir: 5 Porquês no YouTube
+          </a>
+        </div>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-head">
+          <div class="tool-num">3</div>
+          <div class="tool-title">Árvore de Problemas</div>
+          <span class="tool-tag">⏱ 40 min</span>
+        </div>
+        <div class="tool-body">
+          <p>Coloque o problema central no meio da folha (ou planilha). Para baixo, mapeie as <strong>causas</strong> (raízes). Para cima, mapeie os <strong>efeitos</strong> (galhos). Útil para escolher qual causa atacar com a solução e quais efeitos positivos o projeto gerará.</p>
+          <a class="link-btn" href="https://www.youtube.com/results?search_query=arvore+de+problemas+como+fazer+logframe+exemplo" target="_blank" rel="noopener">
+            ▶ Assistir: Árvore de Problemas no YouTube
+          </a>
+        </div>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-head">
+          <div class="tool-num">4</div>
+          <div class="tool-title">Mapa de Empatia — conheça quem sofre o problema</div>
+          <span class="tool-tag">⏱ 30 min</span>
+        </div>
+        <div class="tool-body">
+          <p>Coloque-se no lugar do usuário afetado pelo problema. Preencha 6 campos: o que ele <em>pensa e sente, ouve, vê, fala e faz</em>, quais são suas <strong>dores</strong> e seus <strong>ganhos</strong> esperados. Pode ser feito no Miro, Canva ou até numa folha A4.</p>
+          <p><strong>Por que usar:</strong> ajuda a escrever a justificativa com mais empatia e especificidade — mostrando que o grupo entende de verdade quem é o público afetado.</p>
+          <a class="link-btn" href="https://www.youtube.com/results?search_query=mapa+de+empatia+design+thinking+como+preencher" target="_blank" rel="noopener">
+            ▶ Assistir: Mapa de Empatia no YouTube
+          </a>
+          <a class="link-btn blue" href="https://www.canva.com/templates/search/mapa-de-empatia" target="_blank" rel="noopener">
+            🔗 Templates gratuitos no Canva
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ COMO VALIDAR O PROBLEMA ═══════════ -->
+  <div class="sec-title">Como validar que o problema é real</div>
+  <div class="sec-sub">3 formas práticas para esta semana — mesmo com pouco tempo</div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-icon coral">🔍</div>
+      <div class="card-title">Opção 1 · Entrevistas exploratórias — 3 a 5 pessoas</div>
+      <span class="badge badge-coral">Mais poderoso</span>
+    </div>
+    <p>Converse com 3 a 5 pessoas que <strong>vivem o problema</strong> que você quer resolver. Não precisa ser formal — uma conversa de 15 a 20 minutos já gera insights valiosos.</p>
+
+    <div class="steps" style="margin-top:.9rem">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>Como começar a entrevista</h4>
+          <p>Apresente-se brevemente e diga: <em>"Estou pesquisando sobre [contexto]. Você poderia me contar sobre a última vez que você enfrentou [problema]?"</em></p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>Perguntas abertas — não fale da solução</h4>
+          <p>"Como você lida com isso hoje?" / "O que é mais difícil nessa situação?" / "Você já tentou resolver de outra forma? Como foi?"</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>Anote citações literais</h4>
+          <p>Frases exatas do entrevistado têm muito peso na seção de evidências. Ex: <em>"Toda semana perco pelo menos duas horas procurando um substituto quando o cuidador falta."</em></p>
+        </div>
+      </div>
+    </div>
+
+    <a class="link-btn" href="https://www.youtube.com/results?search_query=como+fazer+entrevista+exploratoria+design+thinking+usuarios" target="_blank" rel="noopener">
+      ▶ Como conduzir entrevistas de descoberta
+    </a>
+    <a class="link-btn" href="https://www.youtube.com/results?search_query=roteiro+entrevista+qualitativa+pesquisa+ux" target="_blank" rel="noopener">
+      ▶ Roteiro de entrevista qualitativa
+    </a>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-icon amber">📋</div>
+      <div class="card-title">Opção 2 · Survey rápido pelo WhatsApp / LinkedIn</div>
+      <span class="badge badge-amber">Fácil e rápido</span>
+    </div>
+    <p>Crie um formulário de 5 a 8 perguntas no Google Forms e compartilhe com sua rede. Em 24h você já terá respostas suficientes para referendar o problema.</p>
+
+    <div class="example">
+      <div class="example-label">Modelo de perguntas para o survey</div>
+      <p>1. Você já enfrentou [descreva o problema]? (Sim / Não / Às vezes)<br>
+      2. Com que frequência esse problema ocorre na sua rotina?<br>
+      3. Como isso impacta seu trabalho/vida? (aberta)<br>
+      4. O que você faz atualmente para lidar com essa situação?<br>
+      5. Por que a solução que você usa hoje ainda é insuficiente?<br>
+      6. Você toparia testar uma solução digital para isso? (Sim / Não)</p>
+    </div>
+
+    <a class="link-btn blue" href="https://forms.google.com" target="_blank" rel="noopener">
+      🔗 Criar formulário no Google Forms
+    </a>
+    <a class="link-btn" href="https://www.youtube.com/results?search_query=google+forms+criar+pesquisa+quantitativa+rapido" target="_blank" rel="noopener">
+      ▶ Como criar survey no Google Forms
+    </a>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-icon teal">📚</div>
+      <div class="card-title">Opção 3 · Evidências secundárias — pesquisa de dados existentes</div>
+      <span class="badge badge-teal">Sem precisar sair de casa</span>
+    </div>
+    <p>Se não for possível entrevistar pessoas esta semana, use dados já publicados para comprovar que o problema existe e tem escala. Esta pesquisa também alimentará a Seção 2 na próxima semana.</p>
+
+    <div class="g2" style="margin-top:.8rem">
+      <div class="mini-card">
+        <h5>📖 Artigos acadêmicos</h5>
+        <p>Google Scholar e Scielo. Busque palavras-chave do tema + "Brasil" ou "região sul".</p>
+        <a class="link-btn blue" href="https://scholar.google.com" target="_blank" rel="noopener" style="margin-top:.4rem">Google Scholar</a>
+      </div>
+      <div class="mini-card">
+        <h5>📊 Relatórios e pesquisas</h5>
+        <p>IBGE, SEBRAE, FGV, IPEA, portais do governo. Muitos têm dados setoriais gratuitos.</p>
+        <a class="link-btn blue" href="https://www.sebrae.com.br/sites/PortalSebrae/Insights" target="_blank" rel="noopener" style="margin-top:.4rem">SEBRAE Insights</a>
+      </div>
+      <div class="mini-card">
+        <h5>📰 Reportagens e notícias</h5>
+        <p>Veículos confiáveis (G1, UOL, Valor Econômico, revistas especializadas) mostram que o problema é atual e relevante.</p>
+      </div>
+      <div class="mini-card">
+        <h5>🏢 Dados de mercado</h5>
+        <p>Statista (inglês), consultorias (McKinsey, Deloitte) têm relatórios gratuitos com dados de inovação e mercado.</p>
+        <a class="link-btn blue" href="https://www.statista.com" target="_blank" rel="noopener" style="margin-top:.4rem">Statista</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ ESTRUTURA FINAL DO TEXTO ═══════════ -->
+  <div class="sec-title">Estrutura final do texto para o Word</div>
+  <div class="sec-sub">Como organizar os parágrafos na Seção 1</div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-icon purple">📝</div>
+      <div class="card-title">Sequência recomendada de parágrafos</div>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot current"></div>
+        <div class="tl-content">
+          <h4>Parágrafo 1 — Abertura com o problema (3–5 linhas)</h4>
+          <p>Apresente o problema de forma específica e direta, com dado ou evidência de impacto se possível. Identifique quem é afetado.</p>
+          <span class="tl-tag green">Escreva primeiro</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <h4>Parágrafo 2 — Contexto e causa (4–6 linhas)</h4>
+          <p>Por que o problema existe? Em qual cenário ele está inserido? Mostre que há uma causa estrutural, não apenas um inconveniente pontual.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <h4>Parágrafo 3 — Justificativa e relevância (4–6 linhas)</h4>
+          <p>Por que vale a pena resolver? Qual o impacto de não resolver? Cite dados ou reforce o impacto humano/econômico.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <h4>Objetivo Geral (1–2 frases)</h4>
+          <p>Declare o que o projeto vai desenvolver/propor. Use a fórmula: verbo + o quê + para quem + finalidade.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <h4>Objetivos Específicos — opcional (lista de 2 a 3)</h4>
+          <p>Detalhes de como o objetivo geral será alcançado. Cada item começa com um verbo diferente.</p>
+          <span class="tl-tag">Opcional, mas valoriza o projeto</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="box box-teal" style="margin-top:1rem">
+      <p><strong>Dica de escrita:</strong> escreva a primeira versão sem se preocupar com o tamanho. Depois revise e corte tudo que não responde diretamente às perguntas: "qual é o problema?", "quem sofre?", "por que resolver?" e "o que este projeto faz?"</p>
+    </div>
+  </div>
+
+  <!-- ═══════════ ATIVIDADE DA SEMANA ═══════════ -->
+  <div class="activity">
+    <div class="activity-label">📌 ATIVIDADE DA SEMANA 1</div>
+    <h3>Escreva a Seção 1 do seu projeto</h3>
+    <p>Com base nos materiais desta semana, o grupo deve produzir e submeter a Seção 1 do projeto, composta por:</p>
+    <ul>
+      <li>Introdução com apresentação direta do problema e seu contexto</li>
+      <li>Justificativa com pelo menos um dado ou evidência de relevância</li>
+      <li>Objetivo Geral seguindo a fórmula: verbo + o quê + para quem + finalidade</li>
+      <li>Objetivos específicos (opcional — 2 a 3 itens)</li>
+    </ul>
+    <p style="margin-top:.6rem">Salve no template Word disponibilizado e submeta o arquivo nesta atividade. A entrega vale como primeira versão — ela será revisada e incorporada ao documento final nas semanas seguintes.</p>
+    <div class="activity-footer">
+      <span>📅 Prazo: <strong>31 de maio de 2025</strong></span>
+      <span>📄 Formato: <strong>.docx (template disponibilizado)</strong></span>
+      <span>👥 Entrega: <strong>por grupo</strong></span>
+    </div>
+  </div>
+
+  <!-- ═══════════ CHECKLIST ═══════════ -->
+  <div class="card">
+    <div class="card-head">
+      <div class="card-icon green">✅</div>
+      <div class="card-title">Checklist — antes de entregar a Seção 1</div>
+    </div>
+    <ul class="checklist">
+      <li><span class="check-icon done">☑</span> O problema está descrito de forma <strong>específica</strong> — não genérica</li>
+      <li><span class="check-icon done">☑</span> A abertura vai direto ao ponto — <strong>sem histórico desnecessário</strong></li>
+      <li><span class="check-icon done">☑</span> Está claro <strong>quem é afetado</strong> pelo problema</li>
+      <li><span class="check-icon done">☑</span> A justificativa contém ao menos <strong>um dado ou evidência</strong></li>
+      <li><span class="check-icon done">☑</span> O objetivo geral começa com <strong>verbo no infinitivo</strong></li>
+      <li><span class="check-icon done">☑</span> O objetivo geral especifica <strong>o quê, para quem e para quê</strong></li>
+      <li><span class="check-icon warn">⚠</span> O texto está em <strong>terceira pessoa</strong> (não "nós vamos desenvolver...")</li>
+      <li><span class="check-icon warn">⚠</span> A seção tem entre <strong>0,5 e 0,75 página</strong> — objetiva e sem enrolação</li>
+      <li><span class="check-icon warn">⚠</span> O arquivo foi salvo <strong>no template Word</strong> disponibilizado</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════ MATERIAIS COMPLEMENTARES ═══════════ -->
+  <div class="sec-title">Materiais complementares</div>
+  <div class="sec-sub">Vídeos e leituras para aprofundar os conceitos desta semana</div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-icon slate">🎬</div>
+      <div class="card-title">Vídeos recomendados</div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px">
+      <a class="link-btn" href="https://www.youtube.com/results?search_query=como+definir+problema+inovacao+design+thinking" target="_blank" rel="noopener">▶ Como definir um problema de inovação</a>
+      <a class="link-btn" href="https://www.youtube.com/results?search_query=matriz+CSD+design+thinking+portugues" target="_blank" rel="noopener">▶ Matriz CSD — tutorial</a>
+      <a class="link-btn" href="https://www.youtube.com/results?search_query=5+porques+causa+raiz+lean+exemplos" target="_blank" rel="noopener">▶ 5 Porquês — Toyota / Lean</a>
+      <a class="link-btn" href="https://www.youtube.com/results?search_query=arvore+de+problemas+como+fazer" target="_blank" rel="noopener">▶ Árvore de Problemas</a>
+      <a class="link-btn" href="https://www.youtube.com/results?search_query=mapa+de+empatia+design+thinking+preencher" target="_blank" rel="noopener">▶ Mapa de Empatia</a>
+      <a class="link-btn" href="https://www.youtube.com/results?search_query=como+fazer+entrevista+descoberta+lean+startup" target="_blank" rel="noopener">▶ Entrevistas de descoberta</a>
+      <a class="link-btn" href="https://www.youtube.com/results?search_query=como+escrever+objetivos+projeto+academico+geral+especificos" target="_blank" rel="noopener">▶ Como escrever objetivos de projeto</a>
+      <a class="link-btn" href="https://www.youtube.com/results?search_query=justificativa+projeto+de+pesquisa+como+escrever" target="_blank" rel="noopener">▶ Como escrever justificativa</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-icon blue">🔗</div>
+      <div class="card-title">Fontes para pesquisa de evidências</div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px">
+      <a class="link-btn blue" href="https://scholar.google.com" target="_blank" rel="noopener">Google Scholar</a>
+      <a class="link-btn blue" href="https://www.scielo.br" target="_blank" rel="noopener">Scielo Brasil</a>
+      <a class="link-btn blue" href="https://www.ibge.gov.br" target="_blank" rel="noopener">IBGE</a>
+      <a class="link-btn blue" href="https://www.sebrae.com.br/sites/PortalSebrae/Insights" target="_blank" rel="noopener">SEBRAE Insights</a>
+      <a class="link-btn blue" href="https://www.ipea.gov.br" target="_blank" rel="noopener">IPEA</a>
+      <a class="link-btn blue" href="https://agenciadenoticias.ibge.gov.br" target="_blank" rel="noopener">Agência IBGE</a>
+      <a class="link-btn blue" href="https://www.statista.com" target="_blank" rel="noopener">Statista</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-icon teal">🛠</div>
+      <div class="card-title">Ferramentas gratuitas para esta semana</div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px">
+      <a class="link-btn green" href="https://forms.google.com" target="_blank" rel="noopener">Google Forms — survey</a>
+      <a class="link-btn green" href="https://docs.google.com" target="_blank" rel="noopener">Google Docs — escrita colaborativa</a>
+      <a class="link-btn green" href="https://www.canva.com/templates/search/mapa-de-empatia" target="_blank" rel="noopener">Canva — Mapa de Empatia</a>
+      <a class="link-btn green" href="https://miro.com/templates/empathy-map" target="_blank" rel="noopener">Miro — templates gratuitos</a>
+    </div>
+  </div>
+
+  <!-- Rodapé -->
+  <div style="text-align:center;margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid #e5e7eb">
+    <p style="font-size:12px;color:#9ca3af">Elaboração e Gerenciamento de Projetos Tecnológicos &mdash; Semana 1 &mdash; 25 a 31 de maio de 2025</p>
+    <p style="font-size:12px;color:#bfdbfe;margin-top:.25rem">Dúvidas? Poste no fórum da disciplina ou fale com o professor.</p>
+  </div>
+
+</div><!-- /wrap -->
+</body>
+</html>
